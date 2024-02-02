@@ -1,2 +1,3 @@
 *.exe
 /target/
+/test-reports*/
