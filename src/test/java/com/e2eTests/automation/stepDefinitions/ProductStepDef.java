@@ -110,6 +110,22 @@ public class ProductStepDef {
 		assertTrue("le produit n'est pas supprimé", productPage.productsInCart.size()==0);
 	   
 	}
+	@When("l'utilisateur applique un  filtres pour afficher les produits du moins cher au plus cher")
+	public void l_utilisateur_applique_un_filtres_pour_afficher_les_produits_du_moins_cher_au_plus_cher() {
+		productPage.selectFilterPriceLowToHigh();
+
+	}
+
+	@Then("les produits sont triés du moins cher au plus cher")
+	public void les_produits_sont_triés_du_moins_cher_au_plus_cher() {
+		productPage.verifyFilterSelectedFrmLowToHigh();
+	    
+	}
+
+	@When("l'utilisateur clique sur le bouton {string}")
+	public void l_utilisateur_clique_sur_le_bouton(String string) {
+	    
+	}
 
 
 	@When("l'utilisateur vérifie le prix du produit")
@@ -129,6 +145,7 @@ public class ProductStepDef {
 
 	@Given("l'utilisateur est sur la page d'une catégorie de produits")
 	public void l_utilisateur_est_sur_la_page_d_une_catégorie_de_produits() {
+		assertTrue("on est pas redirigé vers la page de catégorie de produit", productPage.swagLabTitle.size()>0);
 	    
 	}
 

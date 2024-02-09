@@ -11,7 +11,7 @@ import io.cucumber.junit.CucumberOptions;
 		//glue = {""},
 		
 		plugin = { "pretty","html:target/cucumber-report-html", "json:target/cucumber.json","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:" },
-		tags = ("@deletteProductPanier"),
+		tags = ("@typeClick"),
 		
 		monochrome = true
 		)

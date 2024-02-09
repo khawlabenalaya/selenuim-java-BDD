@@ -13,22 +13,21 @@ Feature: Gestion des produits
     When l'utilisateur clique sur un produit spécifique
     Then il devrait être redirigé vers la page des détails du produit
     And les détails du produit devraient être affichés correctement
-	
-	@AjoutProduitPannier
+
+  @AjoutProduitPannier
   Scenario: Ajout de produits au panier
     Given l'utilisateur est sur la page des détails du produit
     When l'utilisateur clique sur le bouton Ajouter au panier
     Then le produit devrait être ajouté avec succès au panier
     And le nombre d'articles dans le panier devrait être mis à jour
-	
-	@deletteProductPanier
+
+  @deletteProductPanier
   Scenario: Suppression de produits du panier
-  	Given l'utilisateur est sur la page des détails du produit
+    Given l'utilisateur est sur la page des détails du produit
     When l'utilisateur clique sur le bouton Ajouter au panier
     And l'utilisateur est sur la page du panier
     And l'utilisateur supprime un produit du panier
     Then le produit devrait être retiré avec succès du panier
- 
 
   Scenario: Vérification du prix du produit
     Given l'utilisateur est sur la page des détails du produit
@@ -44,10 +43,11 @@ Feature: Gestion des produits
     When l'utilisateur utilise les boutons de navigation ou la pagination
     Then il devrait pouvoir naviguer entre différents produits de la catégorie
 
+  @filerLowToHigh
   Scenario: Filtrage des produits
     Given l'utilisateur est sur la page d'une catégorie de produits
-    When l'utilisateur applique des filtres pour afficher des produits spécifiques
-    Then seuls les produits correspondant aux critères sélectionnés devraient être affichés
+    When l'utilisateur applique un  filtres pour afficher les produits du moins cher au plus cher
+    Then les produits sont triés du moins cher au plus cher
 
   Scenario: Recherche de produits
     Given l'utilisateur est sur la page d'accueil

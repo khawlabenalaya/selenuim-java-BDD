@@ -2,6 +2,8 @@ package com.e2eTests.automation.pageObjects;
 
 
 
+import static org.junit.Assert.assertTrue;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -11,10 +13,13 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.e2eTests.automation.utils.ConfigFileReader;
 import com.e2eTests.automation.utils.Setup;
+
+import junit.framework.Assert;
 
 public class ProductPage {
 
@@ -35,6 +40,10 @@ public class ProductPage {
 			
 	final static String PRODUCTQUANTITY_XPATH="//div[@class='cart_quantity']";
 	final static String RemoveButton_ID="remove-sauce-labs-backpack";
+	final static String SwagLabsTitle_XPATH="//div[@class='app_logo']";
+	
+	final static String productSortButton_XPATH="//*[@class='product_sort_container']";
+	final static String productPrice_XPATH="//div[@class='inventory_item_price']";
 	
 	
 	
@@ -63,6 +72,18 @@ public class ProductPage {
 	
 	@FindBy(how = How.ID, using = RemoveButton_ID)
 	public static WebElement removeButton;
+	
+	@FindBy(how = How.XPATH, using = SwagLabsTitle_XPATH)
+	public static List<WebElement> swagLabTitle;
+	
+	@FindBy(how = How.XPATH, using = productSortButton_XPATH)
+	public static WebElement productSortButton;
+	
+	@FindBy(how = How.XPATH, using = productPrice_XPATH)
+	public static List<WebElement> productPrice;
+	
+	
+	
 	
 
 	public ProductPage (WebDriver driver){
@@ -96,6 +117,26 @@ public class ProductPage {
 	public void removeProduct() {
 		wait.until(d ->removeButton.isDisplayed());
 		removeButton.click();
+		
+	}
+	
+	public void selectFilterPriceLowToHigh() {
+		Select filter = new Select(productSortButton);
+				//filter.selectByIndex(3);
+		filter.selectByValue("lohi");
+	}
+	
+	public void verifyFilterSelectedFrmLowToHigh() {
+		
+        double previousPrice = Double.MIN_VALUE;
+        for (WebElement price : productPrice) {
+            String priceText = price.getText().replace("$", "");
+            double currentPrice = Double.parseDouble(priceText);
+            
+            assertTrue("on est pas redirigé vers la page de détail de produit", currentPrice >= previousPrice);
+            
+            previousPrice = currentPrice;
+        }
 		
 	}
 
